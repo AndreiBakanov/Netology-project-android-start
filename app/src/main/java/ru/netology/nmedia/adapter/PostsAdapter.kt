@@ -1,7 +1,9 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +12,18 @@ import ru.netology.nmedia.activity.shortNumber
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnRepostListener = (post: Post) -> Unit
 
-class PostsAdapter (private val onLikeListener: OnLikeListener, private val onRepostListener: OnRepostListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()){
+interface OnInteractionListener {
+    fun onLike(post: Post) {}
+    fun onEdit(post: Post) {    }
+    fun onRemove(post: Post) {}
+    fun onRepost(post: Post) {}
+}
+
+class PostsAdapter (private val onInteractionListener: OnInteractionListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onRepostListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -27,8 +34,7 @@ class PostsAdapter (private val onLikeListener: OnLikeListener, private val onRe
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -40,11 +46,34 @@ class PostViewHolder(
             like.setImageResource(
                 if (post.likedByMe) R.drawable.liked else R.drawable.like
             )
-            like.setOnClickListener { onLikeListener(post) }
+            like.setOnClickListener { onInteractionListener.onLike(post) }
             repost.setImageResource(
                 if (post.repostedByMe) R.drawable.reposted else R.drawable.repost
             )
-            repost.setOnClickListener { onRepostListener(post) }
+            repost.setOnClickListener { onInteractionListener.onRepost(post) }
+
+
+
+            more.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                //R.id.cancel_edit.visibility = View.VISIBLE
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
         }
     }
 }
