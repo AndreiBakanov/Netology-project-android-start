@@ -10,7 +10,7 @@
     <string name="more">more</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_remove">Remove</string>
-    <string name="error_empty_content" translatable="false">Content can\'t be empty</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
     <string name="likes" translatable="false">10</string>
     <string name="reposts" translatable="false">5</string>
     <string name="views" translatable="false">5</string>

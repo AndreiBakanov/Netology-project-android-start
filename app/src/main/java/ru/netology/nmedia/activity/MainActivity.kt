@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
@@ -43,8 +45,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
+        binding.cancelEdit.setOnClickListener {
+            with(binding.content){
+                viewModel.save()
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(this)
+            }
+             }
 
         viewModel.edited.observe(this) { post ->
+            binding.cancelEdit.isVisible = post.id != 0L
             if (post.id == 0L) {
                 return@observe
             }
@@ -74,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 AndroidUtils.hideKeyboard(this)
             }
         }
+
 
     }
 }
