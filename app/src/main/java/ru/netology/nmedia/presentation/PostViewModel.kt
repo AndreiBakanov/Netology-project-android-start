@@ -11,9 +11,9 @@ private val empty = Post(
     published = "",
     content = "",
     likedByMe = false,
-    likes = "",
+    likes = "0",
     repostedByMe = false,
-    reposts = ""
+    reposts = "0"
 )
 
 class PostViewModel : ViewModel() {
