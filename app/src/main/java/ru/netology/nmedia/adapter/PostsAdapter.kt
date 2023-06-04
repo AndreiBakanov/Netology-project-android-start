@@ -41,15 +41,11 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            textLike.text = shortNumber(post.likes)
-            textRepost.text = shortNumber(post.reposts)
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.liked else R.drawable.like
-            )
+            like.text = shortNumber(post.likes)
+            repost.text = shortNumber(post.reposts)
+            like.isChecked = post.likedByMe
             like.setOnClickListener { onInteractionListener.onLike(post) }
-            repost.setImageResource(
-                if (post.repostedByMe) R.drawable.reposted else R.drawable.repost
-            )
+            repost.isChecked = post.repostedByMe
             repost.setOnClickListener { onInteractionListener.onRepost(post) }
 
 
