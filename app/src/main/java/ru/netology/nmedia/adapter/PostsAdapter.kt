@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class PostsAdapter (private val onInteractionListener: OnInteractionListener) : 
 }
 
 class PostViewHolder(
+
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -48,6 +50,7 @@ class PostViewHolder(
             like.setOnClickListener { onInteractionListener.onLike(post) }
             repost.isChecked = post.repostedByMe
             repost.setOnClickListener { onInteractionListener.onRepost(post) }
+            videoImage.isVisible = !post.video.isNullOrBlank()
             videoImage.setOnClickListener{onInteractionListener.onWatch(post)}
 
 

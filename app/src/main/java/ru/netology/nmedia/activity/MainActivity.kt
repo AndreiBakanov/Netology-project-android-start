@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,9 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onWatch(post: Post) {
-                val intent = Intent().apply {
-
-                }
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
 
                 startActivity(intent)
             }
