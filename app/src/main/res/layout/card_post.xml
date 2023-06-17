@@ -111,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:contentDescription="@string/more"
+        android:checkable="true"
         app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toBottomOf="@id/barrier2"
         app:icon="@drawable/ic_repost_24dp"
@@ -127,6 +128,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.AppTheme.IconButton"
+        />
+    <View
+        android:id="@+id/videoImage"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:background="@drawable/group_1"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toTopOf="@id/barrier2"
+        android:layout_margin="@dimen/micro_common_spacing"
+        android:visibility="gone"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

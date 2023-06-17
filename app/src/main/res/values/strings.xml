@@ -2,6 +2,7 @@
     <string name="app_name">netology project</string>
     <string name="nmedia">NMedia!</string>
     <string name="description_post_author_avatar">Avatar</string>
+    <string name="chooser_repost_post">Repost</string>
     <string name="description_post_like" translatable="false">Like</string>
     <string name="description_post_cancel" translatable="false">Cancel</string>
     <string name="post_text" translatable="false">Text</string>

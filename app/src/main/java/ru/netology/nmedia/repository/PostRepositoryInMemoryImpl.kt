@@ -1,7 +1,11 @@
 package ru.netology.nmedia.repository
 
+import android.content.Context
+import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nmedia.activity.NewPostActivity
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.presentation.PostRepository
 
@@ -16,7 +20,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = "99999",
             repostedByMe = false,
-            reposts = "999"
+            reposts = "999",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = nextId++,
@@ -195,3 +200,4 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 }
+

@@ -18,6 +18,7 @@ interface OnInteractionListener {
     fun onEdit(post: Post) {    }
     fun onRemove(post: Post) {}
     fun onRepost(post: Post) {}
+    fun onWatch(post:Post){}
 }
 
 class PostsAdapter (private val onInteractionListener: OnInteractionListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()){
@@ -47,6 +48,9 @@ class PostViewHolder(
             like.setOnClickListener { onInteractionListener.onLike(post) }
             repost.isChecked = post.repostedByMe
             repost.setOnClickListener { onInteractionListener.onRepost(post) }
+            videoImage.setOnClickListener{onInteractionListener.onWatch(post)}
+
+
 
 
 
@@ -69,6 +73,9 @@ class PostViewHolder(
                         }
                     }
                 }.show()
+            }
+            repost.setOnClickListener{
+                onInteractionListener.onRepost(post)
             }
 
         }
