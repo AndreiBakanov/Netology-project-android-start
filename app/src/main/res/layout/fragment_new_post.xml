@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/content"
+        android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="@string/post_text"
@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottomAppBar"
-        app:srcCompat="@drawable/save" />
+        app:srcCompat="@drawable/save"
+        android:contentDescription="@string/description_post_cancel"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

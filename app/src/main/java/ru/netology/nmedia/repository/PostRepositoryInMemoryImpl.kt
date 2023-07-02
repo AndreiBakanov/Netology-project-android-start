@@ -1,11 +1,8 @@
 package ru.netology.nmedia.repository
 
-import android.content.Context
-import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContract
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.activity.NewPostActivity
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.presentation.PostRepository
 
