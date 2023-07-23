@@ -10,14 +10,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.PostFragment.Companion.postId
 import ru.netology.nmedia.adapter.OnInteractionListener
-import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.adapter.PostViewHolder
+import ru.netology.nmedia.databinding.FragmentNewPostBinding
+import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.presentation.PostViewModel
+import ru.netology.nmedia.util.AndroidUtils
+import ru.netology.nmedia.util.LongArg
+import ru.netology.nmedia.util.StringArg
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
-class FeedFragment : Fragment() {
+class PostFragment : Fragment() {
+
+    companion object {
+        var Bundle.postId by LongArg
+    }
+
+
     private val viewModel: PostViewModel by viewModels(
         ownerProducer = ::requireParentFragment
     )
@@ -27,12 +38,12 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentFeedBinding.inflate(
+        val binding = FragmentPostBinding.inflate(
             inflater,
             container,
             false
         )
-        val adapter = PostsAdapter(object : OnInteractionListener {
+        val postViewHolder = PostViewHolder(binding.post, object : OnInteractionListener {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
             }
@@ -62,21 +73,22 @@ class FeedFragment : Fragment() {
                 viewModel.removeById(post.id)
             }
 
-            override fun onPost(post: Post) {
-                findNavController().navigate(R.id.action_feedFragment_to_postFragment, Bundle().apply { postId = post.id })
-            }
+
         })
-
-        binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
+            val post = posts.find {it.id == requireArguments().postId} ?: run {findNavController().navigateUp()
+            return@observe}
+            postViewHolder.bind(post)
         }
-        binding.add.setOnClickListener {
-            findNavController().navigate(R.id.add)
-        }
+
+
         return binding.root
-
-
-
     }
+
+
+
+
+
+
+
 }

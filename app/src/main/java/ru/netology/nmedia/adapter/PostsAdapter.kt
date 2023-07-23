@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
     fun onRepost(post: Post) {}
     fun onWatch(post:Post){}
+    fun onPost(post:Post){}
 }
 
 class PostsAdapter (private val onInteractionListener: OnInteractionListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()){
@@ -79,6 +80,9 @@ class PostViewHolder(
             }
             repost.setOnClickListener{
                 onInteractionListener.onRepost(post)
+            }
+            root.setOnClickListener {
+                onInteractionListener.onPost(post)
             }
 
         }

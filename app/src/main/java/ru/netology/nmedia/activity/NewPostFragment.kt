@@ -10,18 +10,11 @@ import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.presentation.PostViewModel
 import ru.netology.nmedia.util.AndroidUtils
+import ru.netology.nmedia.util.StringArg
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-object StringArg: ReadWriteProperty<Bundle, String?> {
-    override fun setValue(thisRef: Bundle, property: KProperty<*>, value: String?) {
-        thisRef.putString(property.name, value)
-    }
 
-    override fun getValue(thisRef: Bundle, property: KProperty<*>): String? =
-        thisRef.getString(property.name)
-
-}
 
 class NewPostFragment : Fragment() {
 
