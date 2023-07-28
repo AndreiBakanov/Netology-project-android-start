@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class NewPostFragment : Fragment() {
     )
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +39,15 @@ class NewPostFragment : Fragment() {
             container,
             false
         )
-
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.cancelEditing() //Нужно создать
+                    AndroidUtils.hideKeyboard(binding.edit)
+                    findNavController().navigateUp()
+                }
+            }
+        )
         arguments?.textArg
             ?.let(binding.edit::setText)
 

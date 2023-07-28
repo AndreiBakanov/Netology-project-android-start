@@ -36,6 +36,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun edit(post: Post) {
         edited.value = post
     }
+    fun cancelEditing() {
+        edited.value = empty
+    }
 
     fun changeContent(content: String) {
         val text = content.trim()
