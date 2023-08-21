@@ -8,4 +8,6 @@
     <string name="menu_remove">Удалить</string>
     <string name="error_empty_content">Пост не может быть пустым</string>
     <string name="chooser_repost_post">Репост</string>
+    <string name="empty_posts" translatable="false">Нет постов</string>
+    <string name="retry_loading" translatable="false">Перезагрузить</string>
 </resources>
